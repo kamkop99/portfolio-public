@@ -1,0 +1,111 @@
+{
+  "sections": {
+    "about": {
+      "title": "About Me",
+      "icon": "info",
+      "content": {
+        "intro": "Hi, I'm",
+        "full_name": "Lorem Ipsum",
+        "position": "Software Developer",
+        "localization": "Sample City, Anytown",
+        "work_experience": "3+ years of commercial experience",
+        "short_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "backend": ["Java", "Spring Boot", "Hibernate", "Python", "Kotlin", "SQL"],
+        "frontend": ["Angular", "Javascript", "Typescript", "HTML", "CSS"],
+        "interests": ["AI", "technological innovations ", "national cuisine", "chess", "computer games", "logic games (e.g. escape rooms)"],
+        "used_tools": ["Docker", "Kubernetes", "Alfresco", "Camunda", "RabbitMQ", "Postgres", "PostgresSQL", "Keycloak", "Nginx", "Git"]
+      }
+    },
+    "experience": {
+      "title": "Experience",
+      "icon": "school",
+      "content": [
+        {
+          "title": "Full Stack Developer",
+          "fromDate": "07/2022",
+          "toDate": null,
+          "company": "Example Company",
+          "country": "Poland",
+          "description": [
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          ],
+          "technologies": ["Java", "Spring Boot", "Hibernate", "SQL", "Angular", "Docker", "Camunda", "Git"]
+        },
+        {
+          "title": "Master of Science in Bioinformatics",
+          "fromDate": "07/2021",
+          "toDate": "09/2023",
+          "company": "Sample University",
+          "country": "Poland",
+          "description": [
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          ],
+          "technologies": ["AI", "Machine learning", "R", "python"]
+        },
+        {
+          "title": "Bachelor's degree in bioinformatics",
+          "fromDate": "10/2018",
+          "toDate": "07/2021",
+          "company": "Sample University",
+          "country": "Poland",
+          "description": [
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          ],
+          "links": {
+            "toLink": "Sample Link",
+            "link": "https://example.com"
+          },
+          "technologies": ["Python", "C", "C++", "Java", "Git"]
+        },
+        {
+          "title": "",
+          "fromDate": "",
+          "toDate": "",
+          "company": "",
+          "country": "",
+          "description": [],
+          "technologies": []
+        }
+      ]
+    },
+    "projects": {
+      "title": "Projects",
+      "icon": "emoji_objects",
+      "content": [
+        {
+          "title": "Sample Project",
+          "year": "2024",
+          "imageURL": "img/portfolio.jpg",
+          "githubURL": "https://github.com/lorem-ipsum/sample-project",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          "techStack": ["Angular", "PrimeNG"],
+          "techInfo": {
+            "TypeScript": "42",
+            "SCSS": "31",
+            "HTML": "27"
+          }
+        }
+      ]
+    }
+  },
+  "headings": {
+    "interests": "Interests",
+    "skills": "Skills",
+    "backend": "backend",
+    "frontend": "frontend",
+    "tools": "Used Tools",
+    "contact": "Contact Me",
+    "githubButton": "View on GitHub"
+  },
+  "experience": {
+    "present": "Present"
+  }
+}

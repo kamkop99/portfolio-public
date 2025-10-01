@@ -1,0 +1,23 @@
+$sidebar-width: 15%;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 100px;
+  text-align: right;
+  justify-items: right;
+  
+  background: rgb(14, 14, 16, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+}
+
+.main {
+  height: 100vh;
+  padding: 1rem;
+  min-width: 0;
+}

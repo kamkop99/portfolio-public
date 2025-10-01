@@ -1,0 +1,47 @@
+.content {
+  margin-top: 5%;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+
+  .section {
+    margin: auto;
+    width: 80%;
+    padding: 10rem 0;
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 100px;
+      justify-content: center;
+      text-align: center;
+      font-size: 30px;
+    }
+  }
+}
+.relative {
+  position: relative;
+}
+
+.inline-icon {
+  font-size: inherit;
+  line-height: inherit - 5px;
+  display: inline-block;
+  vertical-align: text-bottom;
+  padding-right: 5px;
+  margin-bottom: 3px;
+}
+
+#projects {
+  margin: auto 0;
+  width: 100%;
+}
+
+@media (max-width: 1550px) {
+  .content {
+    margin: 0;
+    width: 100%;
+  }
+  #projects {
+    width: 90%;
+  }
+}
