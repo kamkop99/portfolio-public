@@ -35,7 +35,7 @@
           "technologies": ["Java", "Spring Boot", "Hibernate", "SQL", "Angular", "Docker", "Camunda", "Git"]
         },
         {
-          "title": "Master of Science in Bioinformatics",
+          "title": "Title of studies 2",
           "fromDate": "07/2021",
           "toDate": "09/2023",
           "company": "Sample University",
@@ -48,7 +48,7 @@
           "technologies": ["AI", "Machine learning", "R", "python"]
         },
         {
-          "title": "Bachelor's degree in bioinformatics",
+          "title": "Titile of studies 1",
           "fromDate": "10/2018",
           "toDate": "07/2021",
           "company": "Sample University",
