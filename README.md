@@ -12,6 +12,7 @@
    - Prerequisites
    - Installation
    - Running Locally
+   - Set your own data
 6. [License](#license)
 
 ---
@@ -71,6 +72,16 @@ npm install -g @angular/cli
 ```bash
 ng serve
 ```
+
+
+### Set your own data
+
+Localization files live in `public/i18n/`:
+- `en.json` — English
+- `pl.json` — Polish
+
+Edit the values to match your details (keep the keys the same).  
+After saving, restart the dev server if changes don’t show up.
 
 ---
 
