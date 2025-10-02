@@ -48,11 +48,11 @@ export class Content implements OnInit {
   }
 
   private scrollToFragment(): void {
-    if (this.currentFragment) {
-      const element = this.sectionElements.find(el => el.nativeElement.id === this.currentFragment);
-      if (element) {
-        element.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
+    if (!this.currentFragment || !this.sectionElements?.length) return;
+    
+    const element = this.sectionElements.toArray().find(
+      el => el.nativeElement.id === this.currentFragment
+    );
+    element?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
