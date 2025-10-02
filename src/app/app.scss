@@ -1,5 +1,8 @@
-$sidebar-width: 15%;
-
+main, .content, .scroll-wrapper {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 .navbar {
   position: fixed;
   top: 0;
