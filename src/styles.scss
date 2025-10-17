@@ -1,6 +1,32 @@
+:root {
+  color-scheme: light dark;
+  --theme-t: 0;
+  --background-color: #0E0E10;
+  --font-color: #ffffff;
+  --special-font-color: #FF2800;
+  --special-font-color-80-opacity: color-mix(in srgb, var(--special-font-color) 80%, transparent);
+  --special-font-color-50-opacity: color-mix(in srgb, var(--special-font-color) 50%, transparent);
+  --filter-base: brightness(0) saturate(100%) invert(27%) sepia(93%) saturate(5166%) hue-rotate(360deg) brightness(102%) contrast(102%);
+  --filter-hover: brightness(0) saturate(100%) invert(21%) sepia(99%) saturate(3291%) hue-rotate(360deg) brightness(109%) contrast(108%);
+  .theme-toggle .sun { z-index: 1; }
+}
+
+:root[data-theme="dark"] {
+  --theme-t: 1;
+  --background-color: #F7F7F7;
+  --font-color: #0E0E10;
+  --special-font-color: #004AAD;
+  --special-font-color-80-opacity: color-mix(in srgb, var(--special-font-color) 80%, transparent);
+  --special-font-color-50-opacity: color-mix(in srgb, var(--special-font-color) 50%, transparent);
+  --filter-base: brightness(0) saturate(100%) invert(38%) sepia(100%) saturate(2311%) hue-rotate(194deg) brightness(102%) contrast(104%);
+  --filter-hover: brightness(0) saturate(100%) invert(38%) sepia(100%) saturate(2311%) hue-rotate(194deg) brightness(112%) contrast(110%);
+  .theme-toggle .moon  { z-index: 1; }
+}
+
+
 html { 
-    background: #0E0E10;
-    color: white;
+    background: var(--background-color);
+    color: var(--font-color);
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
 }
 
@@ -9,3 +35,27 @@ html, body { margin: 0; overflow-x: clip; }
 img, video { max-width: 100%; height: auto; display: block; }
 pre, code { white-space: pre-wrap; word-break: break-word; }
 :where(h1,h2,h3,h4,h5,h6,p) { overflow-wrap: anywhere; }
+
+
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 450ms;
+  animation-timing-function: ease;
+}
+
+::view-transition-new(root) {
+  animation-name: theme-wipe-in;
+}
+
+@keyframes theme-wipe-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}

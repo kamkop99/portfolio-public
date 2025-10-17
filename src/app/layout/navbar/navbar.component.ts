@@ -5,6 +5,7 @@ import { AboutSection } from '../../shared/models/about-model';
 import { ExperienceSection } from '../../shared/models/experience-model';
 import { TranslateService } from '@ngx-translate/core';
 import { TrackService } from '../../core/services/track.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 type Section = AboutSection | ExperienceSection;
 
@@ -31,7 +32,8 @@ export class Navbar implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private translate: TranslateService,
-    private trackService: TrackService
+    private trackService: TrackService,
+    private themeService: ThemeService
   ) {
     this.translate.setDefaultLang(this.currentLang);
     this.translate.use(this.currentLang);
@@ -39,10 +41,11 @@ export class Navbar implements OnInit, AfterViewInit, OnDestroy {
   
   ngOnInit(): void {
       this.subscription = this.trackService.activeSection$.subscribe(
-      (sectionId) => {
-        this.activeId = sectionId;
-      }
-    );
+        (sectionId) => {
+          this.activeId = sectionId;
+        }
+      );
+      this.themeService.init();
   }
   
   ngAfterViewInit() {
@@ -91,5 +94,11 @@ export class Navbar implements OnInit, AfterViewInit, OnDestroy {
   }
     toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
+  }
+
+  onToggleTheme() { this.themeService.toggleWithTransition(); }
+
+  get isDark(): boolean {
+    return document.documentElement.getAttribute('data-theme') === 'dark';
   }
 }

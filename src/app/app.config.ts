@@ -6,8 +6,8 @@ import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 const routerOptions: ExtraOptions = {
-  anchorScrolling: 'enabled', // Ensure scrolling to fragments works
-  scrollPositionRestoration: 'disabled' // Prevents browser's default scroll interfering
+  anchorScrolling: 'enabled',
+  scrollPositionRestoration: 'disabled'
 };
 
 export const appConfig: ApplicationConfig = {

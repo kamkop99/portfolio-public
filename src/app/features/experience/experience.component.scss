@@ -1,8 +1,8 @@
 
 p-card {
   text-align: left;
-  background: #0E0E10;
-  border: 1px solid rgba(255, 40, 0, 0.2);
+  background: var(--background-color);
+  border: 1px solid color-mix(in srgb, var(--special-font-color) 20%, transparent);
   z-index: 0;
 }
 .connector  {
@@ -89,7 +89,7 @@ p-card {
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(to bottom, #FF2800 0%, rgba(255, 40, 0, 0.5) 50%, rgba(255, 40, 0, 0) 100%);
+  background: linear-gradient(to bottom, var(--special-font-color) 0%, var(--special-font-color-50-opacity) 50%, color-mix(in srgb, var(--special-font-color) 1%, transparent) 100%);
   height: 0%;
   transition: height 0.1s linear;
   border-radius: 2px 2px 0 0;
@@ -119,12 +119,12 @@ p-card {
   gap: 0.25rem;
   font-size: 0.9rem;
   padding-bottom: 10px;
-  color: white;
+  color: var(--font-color);
 }
 
 :host ::ng-deep .separator {
   margin: 0 0.25rem;
-  color: #FF2800 !important;
+  color: var(--special-font-color) !important;
 }
 p-card:last-of-type {
   transition: transform 250ms ease, box-shadow 400ms ease, border-radius 250ms ease;
@@ -132,7 +132,7 @@ p-card:last-of-type {
 }
 
 p-card:last-of-type:hover {
-  box-shadow: rgba(232, 0, 0, 0.67) 0 0 30px;
+  box-shadow: color-mix(in srgb, var(--special-font-color) 67%, transparent) 0 0 30px;
   transform: scale(1.05);
   .title, .animated-line {
     background-position: left;
@@ -140,7 +140,7 @@ p-card:last-of-type:hover {
 }
 
 p{ 
-  color: white;
+  color: var(--font-color);
 }
 
 .orange {
@@ -163,7 +163,7 @@ p{
   padding-bottom: 5px;
   margin-bottom: 15px;
 
-  background-image: linear-gradient(90deg, #FF2800 50%, white 50%);
+  background-image: linear-gradient(90deg, var(--special-font-color) 50%, var(--font-color) 50%);
   background-position:100%;
   background-size:200% 100%;
   background-clip: text;
@@ -177,9 +177,9 @@ p{
   margin-top: 10px;
   height: 1px;
   width: 100%;
-  background: #0E0E10;;
+  background: var(--background-color);
   
-  background-image: linear-gradient(90deg, #FF2800 50%, #0E0E10 50%);
+  background-image: linear-gradient(90deg, var(--special-font-color) 50%, var(--background-color) 50%);
   background-position:100%;
   background-size:200% 100%;
   background-clip: border-box;
@@ -205,7 +205,7 @@ p{
   display: inline-block;
   vertical-align: text-bottom;
   padding-right: 5px;
-  color: #FF2800;
+  color: var(--special-font-color-80-opacity);
   transition: transform 0.5s ease;
 }
 
@@ -220,20 +220,20 @@ p{
   align-items: center;
   padding: 0.25rem 0.75rem;
   background-color: transparent;
-  color: rgba(255, 40, 0, 0.5);
+  color: var(--special-font-color-50-opacity);
   font-size: 1.15rem;
   line-height: 1;
   border-radius: 25px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   white-space: nowrap;
   user-select: none;
-  border-color: rgba(255, 40, 0, 0.5);
+  border-color: var(--special-font-color-50-opacity);
 }
 
 .technology:hover {
   transform: scale(1.1);
-  color: rgba(255, 40, 0, 0.8);
-  border-color: rgba(255, 40, 0, 0.8);
+  color: var(--special-font-color-80-opacity);
+  border-color: var(--special-font-color-80-opacity);
   transition: transform 500ms ease;
 }
 
@@ -247,7 +247,7 @@ p{
 
 p:hover {
   transition: transform 1000ms ease;
-  color: rgba(255, 40, 0, 0.8);
+  color: var(--special-font-color-80-opacity);
 }
 
 p:hover .inline-icon {
@@ -255,15 +255,15 @@ p:hover .inline-icon {
 }
 
 .connector.filled>.dot {
-  background: #FF2800;
+  background: var(--special-font-color)
 }
 
 .connector.filled>.line.right {
-  background: linear-gradient(to right, rgba(255, 40, 0, 0.5) 0%, rgba(255, 40, 0, 0) 100%);
+  background: linear-gradient(to right, var(--special-font-color-50-opacity) 0%, var(--background-color) 100%);
 }
 
 .connector.filled>.line.left {
-  background: linear-gradient(to left, rgba(255, 40, 0, 0.5) 0%, rgba(255, 40, 0, 0) 100%);
+  background: linear-gradient(to left, var(--special-font-color-50-opacity) 0%, var(--background-color) 100%);
 }
 
 .card-list {
