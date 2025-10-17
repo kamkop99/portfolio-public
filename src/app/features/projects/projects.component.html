@@ -31,7 +31,11 @@
                                     </span>
                                 </div>
                                 <div class="techPercentage" appAnimateOnVisibleLeft>
-                                    <p-metergroup [value]="getTechValues(d.techInfo)" />
+                                    <app-decimal-meter-group
+                                    [items]="toMeterItems(d.techInfo)"
+                                    [max]="100"
+                                    [decimals]="1">
+                                    </app-decimal-meter-group>
                                 </div>
                             </div>
                         </ng-template>

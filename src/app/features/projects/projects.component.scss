@@ -5,21 +5,21 @@ ul {
 
 ::ng-deep .p-component.p-fieldset {
     margin: 30px !important;
-    border-color: rgba(255, 40, 0, 0.5);
+    border-color: var(--special-font-color-50-opacity);
     background: transparent;
-    color: white;
+    color: var(--font-color);
     transition: transform 500ms ease;
 }
 
 ::ng-deep .p-component.p-fieldset:hover {
     .p-fieldset-legend {
-        border-color: rgba(255, 40, 0, 0.8) !important;
+        border-color: var(--special-font-color-80-opacity) !important;
         transform: scale(1.05);
-        box-shadow: 0 0 20px 0 rgba(232, 0, 0, 0.67);
+        box-shadow: 0 0 20px 0 color-mix(in srgb, var(--special-font-color) 67%, transparent);
     }
     transform: scale(1.05);
-    border-color: rgba(255, 40, 0, 0.8);
-    box-shadow: 0 0 20px 0 rgba(232, 0, 0, 0.67);
+    border-color: var(--special-font-color-80-opacity);
+    box-shadow: 0 0 20px 0 color-mix(in srgb, var(--special-font-color) 67%, transparent);
 }
 
 ::ng-deep .p-splitter-gutter {
@@ -46,9 +46,9 @@ ul {
 }
 
 ::ng-deep .p-fieldset-legend {
-    border-color: rgba(255, 40, 0, 0.5) !important;
-    background-color: #0E0E10 !important;
-    color: white;
+    border-color: var(--special-font-color-50-opacity) !important;
+    background-color: var(--background-color) !important;
+    color: var(--font-color);
 }
 
 .techInfo {
@@ -66,20 +66,20 @@ ul {
   align-items: center;
   padding: 0.25rem 0.75rem;
   background-color: transparent;
-  color: rgba(255, 40, 0, 0.5);
+  color: var(--special-font-color-50-opacity);
   font-size: 1.15rem;
   line-height: 1;
   border-radius: 25px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid color-mix(in srgb, var(--background-color) 8%, transparent);
   white-space: nowrap;
   user-select: none;
-  border-color: rgba(255, 40, 0, 0.5);
+  border-color: var(--special-font-color-50-opacity);
 }
 
 .techStack:hover {
   transform: scale(1.1);
-  color: rgba(255, 40, 0, 0.8);
-  border-color: rgba(255, 40, 0, 0.8);
+  color: var(--special-font-color-80-opacity);
+  border-color: var(--special-font-color-80-opacity);
   transition: transform 500ms ease;
 }
 
@@ -88,11 +88,11 @@ ul {
 }
 
 ::ng-deep .p-metergroup-label-text {
-    color: rgba(255, 40, 0, 0.5);
+    color: var(--special-font-color-50-opacity);
 }
 
 ::ng-deep .p-metergroup-label-text:hover {
-    color: rgba(255, 40, 0, 0.8);
+    color: var(--special-font-color-80-opacity);
 }
 
 .img-panel {
@@ -125,7 +125,7 @@ ul {
   align-items: center;
   justify-content: center;
 
-  background: rgba(0, 0, 0, 0.55);
+  background: color-mix(in srgb, var(--background-color) 55%, transparent);
 
   transform: scaleY(0);
   transform-origin: top center;
@@ -144,20 +144,20 @@ ul {
 }
 
 ::ng-deep .overlay-btn {
-  color: rgba(255, 40, 0, 0.5) !important;;
-  border-color: rgba(255, 40, 0, 0.5) !important;;
+  color: var(--special-font-color-50-opacity) !important;
+  border-color: var(--special-font-color-50-opacity) !important;
   background: transparent;
 }
 
 ::ng-deep .overlay-btn:hover {
-  background: rgba(14, 14, 16, 0.8) !important;
-  color: rgba(255, 40, 0, 0.8) !important;
-  border-color: rgba(255, 40, 0, 0.8) !important;
+  background: color-mix(in srgb, var(--background-color) 80%, transparent) !important;
+  color: var(--special-font-color-80-opacity) !important;
+  border-color: var(--special-font-color-80-opacity) !important;
 }
 
 :host ::ng-deep .separator-dot {
   margin: 0 0.5rem;
-  color: rgba(255, 40, 0, 0.8) !important;
+  color: var(--special-font-color-80-opacity) !important;
 }
 
 ::ng-deep .p-metergroup-meters {
