@@ -11,11 +11,12 @@ import { map, Subscription } from 'rxjs';
 import { AnimateOnVisibleRight } from '../../shared/directives/animate-on-visible/animate-on-visible-right.directive';
 import { AnimateOnVisibleLeft } from '../../shared/directives/animate-on-visible/animate-on-visible-left.directive';
 import { AnimateOnVisibleDown } from '../../shared/directives/animate-on-visible/animate-on-visible-down.directive';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TimeUnitPipe } from '../../shared/pipes/time-unit-pipe';
 
 @Component({
   selector: 'app-experience',
-  imports: [CommonModule, FormsModule, ButtonModule, TimelineModule, CardModule, AnimateOnVisibleRight, AnimateOnVisibleLeft, AnimateOnVisibleDown],
+  imports: [CommonModule, FormsModule, ButtonModule, TimelineModule, CardModule, AnimateOnVisibleRight, AnimateOnVisibleLeft, AnimateOnVisibleDown, TranslateModule, TimeUnitPipe],
   templateUrl: './experience.component.html',
   styleUrl: './experience.component.scss',
   providers: [],
@@ -40,7 +41,7 @@ export class Experience implements OnInit, OnDestroy {
 
   parseDate(date: string): Date {
     const [monthStr, yearStr] = date.split('/');
-    const month = parseInt(monthStr, 10) - 1;
+    const month = parseInt(monthStr, 10);
     const year = parseInt(yearStr, 10);
     return new Date(year, month, 0);
   }
@@ -50,6 +51,23 @@ export class Experience implements OnInit, OnDestroy {
       return this.translate.instant("experience.present");
     }
     return  date.split('/')[1];
+  }
+
+  getDateDiff(fromDate: string, toDate: string | null) {
+    const from = this.parseDate(fromDate);
+    const to   = toDate ? this.parseDate(toDate) : new Date();
+
+    let years = to.getFullYear() - from.getFullYear();
+    let months = to.getMonth() - from.getMonth() + 1;
+
+    if (months < 0) {
+      years -= 1;
+      months += 12;
+    }
+
+    if (years < 0) { years = 0; months = 0; }
+
+    return { y: years, m: months };
   }
 
   ngOnInit() {

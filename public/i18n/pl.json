@@ -1,69 +1,115 @@
 {
   "sections": {
     "about": {
-      "title": "About Me",
+      "title": "O mnie",
       "icon": "info",
       "content": {
-        "intro": "Hi, I'm",
-        "full_name": "Lorem Ipsum",
-        "position": "Software Developer",
-        "localization": "Sample City, Anytown",
-        "work_experience": "3+ years of commercial experience",
-        "short_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "backend": ["Java", "Spring Boot", "Hibernate", "Python", "Kotlin", "SQL"],
-        "frontend": ["Angular", "Javascript", "Typescript", "HTML", "CSS"],
-        "interests": ["AI", "technological innovations ", "national cuisine", "chess", "computer games", "logic games (e.g. escape rooms)"],
-        "used_tools": ["Docker", "Kubernetes", "Alfresco", "Camunda", "RabbitMQ", "Postgres", "PostgresSQL", "Keycloak", "Nginx", "Git"]
+        "intro": "Cześć, jestem",
+        "full_name": "Kamil Kopciuch",
+        "position": "Programista Full Stack",
+        "localization": "Poznań/Toruń w Polsce",
+        "work_experience": "Ponad 3 lata doświadczenia komercyjnego",
+        "short_description": "Jestem programistą oprogramowania z tytułem magistra bioinformatyki i trzyletnim doświadczeniem komercyjnym w projektach opartych na Java i Spring Boot. Pasjonuję się sztuczną inteligencją, przetwarzaniem języka naturalnego oraz innowacjami technologicznymi w świecie IT. Regularnie śledzę rozwój narzędzi programistycznych, frameworków i trendów w architekturze systemów. Cenię czystą, zrozumiałą strukturę kodu, automatyzację pracy oraz dzielenie się wiedzą z zespołem.",
+        "backend": [
+          "Java",
+          "Spring Boot",
+          "Hibernate",
+          "Python",
+          "Kotlin",
+          "SQL"
+        ],
+        "frontend": [
+          "Angular",
+          "Javascript",
+          "Typescript",
+          "HTML",
+          "CSS"
+        ],
+        "interests": [
+          "AI",
+          "innowacje technologiczne",
+          "kuchnie narodowe",
+          "szachy",
+          "gry komputerowe",
+          "gry logiczne (np. escape roomy)"
+        ],
+        "used_tools": [
+          "Docker",
+          "Kubernetes",
+          "Alfresco",
+          "Camunda",
+          "RabbitMQ",
+          "Postgres",
+          "Keycloak",
+          "Nginx",
+          "Git"
+        ]
       }
     },
     "experience": {
-      "title": "Experience",
+      "title": "Doświadczenie",
       "icon": "school",
       "content": [
         {
-          "title": "Full Stack Developer",
+          "title": "Programista Full Stack",
           "fromDate": "07/2022",
-          "toDate": null,
-          "company": "Example Company",
-          "country": "Poland",
+          "toDate": "10/2025",
+          "company": "BeOne",
+          "country": "Polska",
           "description": [
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            "Projektowanie i rozwijanie aplikacji opartych na mikroserwisach głównie z użyciem technologii Java, Spring Boot i Angular.",
+            "Projektowanie procesów biznesowych, integracja z RabbitMQ i Keycloak.",
+            "Utrzymywanie i rozwijanie rozwiązań wdrożonych w środowisku Kubernetes.",
+            "Analiza i dostosowywanie projektu do potrzeb biznesowych klienta."
           ],
-          "technologies": ["Java", "Spring Boot", "Hibernate", "SQL", "Angular", "Docker", "Camunda", "Git"]
+          "technologies": [
+            "Java",
+            "Spring Boot",
+            "Hibernate",
+            "SQL",
+            "Angular",
+            "Docker",
+            "Camunda",
+            "Git"
+          ]
         },
         {
-          "title": "Title of studies 2",
+          "title": "mgr inż. bioinformatyki",
           "fromDate": "07/2021",
           "toDate": "09/2023",
-          "company": "Sample University",
-          "country": "Poland",
+          "company": "Politechnika Poznańska",
+          "country": "Polska",
           "description": [
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            "Pisanie bardziej zaawansowanych programów dla problemów biotechnologicznych.",
+            "Wprowadzenie do uczenia maszynowego i sztucznej inteligencji.",
+            "Nauka pisania programów statystycznych w języku R."
           ],
-          "technologies": ["AI", "Machine learning", "R", "python"]
+          "technologies": [
+            "AI",
+            "Machine learning",
+            "R",
+            "Python"
+          ]
         },
         {
-          "title": "Titile of studies 1",
+          "title": "Licencjat z bioinformatyki",
           "fromDate": "10/2018",
           "toDate": "07/2021",
-          "company": "Sample University",
-          "country": "Poland",
+          "company": "Politechnika Poznańska",
+          "country": "Polska",
           "description": [
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            "Pierwsze wprowadzenie do programowania.",
+            "Nauka rozwiązywania problemów, znajdowania rozwiązań i debugowania.",
+            "Rozwijanie myślenia logicznego w kontekście programowania i rozwiązywania problemów.",
+            "Praca dyplomowa uwzględniona w publikacji DOI: 10.1007/s13353-022-00730-y."
           ],
-          "links": {
-            "toLink": "Sample Link",
-            "link": "https://example.com"
-          },
-          "technologies": ["Python", "C", "C++", "Java", "Git"]
+          "technologies": [
+            "Python",
+            "C",
+            "C++",
+            "Java",
+            "Git"
+          ]
         },
         {
           "title": "",
@@ -77,35 +123,58 @@
       ]
     },
     "projects": {
-      "title": "Projects",
+      "title": "Projekty",
       "icon": "emoji_objects",
       "content": [
         {
-          "title": "Sample Project",
-          "year": "2024",
+          "title": "Portfolio",
+          "year": "2025",
           "imageURL": "img/portfolio.jpg",
-          "githubURL": "https://github.com/lorem-ipsum/sample-project",
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-          "techStack": ["Angular", "PrimeNG"],
+          "githubURL": "https://github.com/kamkop99/portfolio-public",
+          "description": "Ten projekt portfolio został stworzony z wykorzystaniem najnowszej wersji Angulara oraz TypeScript, HTML i SCSS. Zrealizowałem go nie tylko po to, aby zaprezentować swoje prace, lecz także aby rzucić sobie wyzwanie i pogłębić zrozumienie nowoczesnych funkcji Angulara oraz najlepszych praktyk.",
+          "techStack": [
+            "Angular",
+            "Angular Cli",
+            "Html",
+            "Primeng",
+            "Rxjs",
+            "Scss",
+            "Typescript",
+            "Portfolio"
+          ],
           "techInfo": {
-            "TypeScript": "42",
-            "SCSS": "31",
-            "HTML": "27"
+            "TypeScript": "44.8",
+            "SCSS": "28.2",
+            "HTML": "27.0"
           }
         }
       ]
     }
   },
   "headings": {
-    "interests": "Interests",
-    "skills": "Skills",
+    "interests": "Zainteresowania",
+    "skills": "Umiejętności",
     "backend": "backend",
     "frontend": "frontend",
-    "tools": "Used Tools",
-    "contact": "Contact Me",
-    "githubButton": "View on GitHub"
+    "tools": "Używane narzędzia",
+    "contact": "Kontakt",
+    "githubButton": "Zobacz na GitHubie"
   },
   "experience": {
-    "present": "Present"
+    "present": "Aktualnie"
+  },
+  "time": {
+    "year": {
+      "one": "rok",
+      "few": "lata",
+      "many": "lat",
+      "other": "roku"
+    },
+    "month": {
+      "one": "miesiąc",
+      "few": "miesiące",
+      "many": "miesięcy",
+      "other": "miesiąca"
+    }
   }
 }

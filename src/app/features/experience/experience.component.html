@@ -25,7 +25,16 @@
                     </div>
                     <div class="glow-wrapper" #card>
                         <p-card>
-                            <div class="header orange">{{getYear(exp.fromDate)}}-{{getYear(exp.toDate)}}</div>
+                            <div class="header">
+                              <span class="orange">{{getYear(exp.fromDate)}}-{{getYear(exp.toDate)}}</span>
+                              &nbsp;
+                              <span class="time-experience">
+                                <ng-container *ngIf="getDateDiff(exp.fromDate, exp.toDate) as diff">
+                                  {{ diff.y | timeUnit:'year' }}
+                                  {{ diff.m | timeUnit:'month' }}
+                                </ng-container>
+                              </span>
+                            </div>
                             <h3 class="title">
                                 {{exp.title}}
                                 <div class="animated-line"></div>
@@ -69,7 +78,16 @@
                     </div>
                     <div class="glow-wrapper" #card>
                         <p-card>
-                            <div class="header orange">{{getYear(exp.fromDate)}}-{{getYear(exp.toDate)}}</div>
+                                  <div class="header">
+                                    <span class="orange">{{getYear(exp.fromDate)}}-{{getYear(exp.toDate)}}</span>
+                                    &nbsp;
+                                    <span class="time-experience">
+                                      <ng-container *ngIf="getDateDiff(exp.fromDate, exp.toDate) as diff">
+                                        {{ diff.y | timeUnit:'year' }}
+                                        {{ diff.m | timeUnit:'month' }}
+                                      </ng-container>
+                                    </span>
+                                  </div>
                             <h3 class="title">
                                 {{exp.title}}
                                 <div class="animated-line"></div>
@@ -116,8 +134,15 @@
       class="exp-card"
       appAnimateOnVisibleDown
     >
-      <div class="header orange">
-        {{ getYear(exp.fromDate) }}–{{ getYear(exp.toDate) }}
+      <div class="header">
+        <span class="orange">{{getYear(exp.fromDate)}}-{{getYear(exp.toDate)}}</span>
+        &nbsp;
+        <span class="time-experience">
+            <ng-container *ngIf="getDateDiff(exp.fromDate, exp.toDate) as diff">
+              {{ diff.y | timeUnit:'year' }}
+              {{ diff.m | timeUnit:'month' }}
+            </ng-container>
+        </span>
       </div>
 
       <h3 class="title">
