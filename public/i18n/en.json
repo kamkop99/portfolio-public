@@ -107,5 +107,15 @@
   },
   "experience": {
     "present": "Present"
+  },
+  "time": {
+    "year": {
+      "one": "year",
+      "other": "years"
+    },
+    "month": {
+      "one": "month",
+      "other": "months"
+    }
   }
 }
