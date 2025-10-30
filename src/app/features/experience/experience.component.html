@@ -26,9 +26,9 @@
 } @else {
 <div class="card-list">
   @for (exp of vmData(); track exp?.__id) {
-  <p-card class="exp-card" appAnimateOnVisibleDown>
-    <app-experience-card [exp]="exp" side="left"></app-experience-card>
-  </p-card>
+    @if(exp.reached) {
+      <app-experience-card [exp]="exp" side="left" appAnimateOnVisibleSideDirective></app-experience-card>
+    }
   }
 </div>
 }
