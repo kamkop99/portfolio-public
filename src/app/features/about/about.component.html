@@ -19,15 +19,27 @@
             <p appAnimateOnVisibleRight class="titles">{{ 'headings.skills' | translate}}</p>
             <p appAnimateOnVisibleRight class="margins">{{ 'headings.backend' | translate}}</p>
             <div class="skills">
-                <span class="skill" *ngFor="let skill of data.backend" appAnimateOnVisibleDown>
+                @for (skill of data.backend; track $index) {
+                    <span
+                    class="skill"
+                    appAnimateOnVisibleDown
+                    [delayMs]="$index * 120"
+                    [durationMs]="600">
                     {{ skill }}
-                </span>
+                    </span>
+                }
             </div>
             <p appAnimateOnVisibleRight class="margins">{{ 'headings.frontend' | translate}}</p>
             <div class="skills">
-                <span class="skill" *ngFor="let skill of data.frontend" appAnimateOnVisibleDown>
+                @for (skill of data.frontend; track $index) {
+                    <span
+                    class="skill"
+                    appAnimateOnVisibleDown
+                    [delayMs]="$index * 120"
+                    [durationMs]="600">
                     {{ skill }}
-                </span>
+                    </span>
+                }
             </div>
             <p appAnimateOnVisibleRight class="titles">{{ 'headings.tools' | translate}}</p>
             <div class="tools">

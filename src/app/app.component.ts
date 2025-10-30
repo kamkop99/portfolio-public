@@ -1,4 +1,4 @@
-import { Component, OnInit, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal, Type } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Content } from './features/content/content.component';
 import { Navbar } from './layout/navbar/navbar.component';
@@ -8,10 +8,11 @@ import { Navbar } from './layout/navbar/navbar.component';
   selector: 'app-root',
   imports: [Content, Navbar],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App implements OnInit {
-  sections: any[] = [];
+  sections = signal<any>([]);
 
   constructor(private translate: TranslateService) {}
 
@@ -28,14 +29,14 @@ export class App implements OnInit {
       .get('sections')
       .subscribe(
         (data: Record<string, { title: string; icon: string; content: unknown }>) => {
-          this.sections = Object.entries(data).map(([id, value]) => {
+          this.sections.set(Object.entries(data).map(([id, value]) => {
             return {
                 id: id,
                 icon: value.icon,
                 title: value.title,
                 content: value.content,
               }
-          });
+          }));
         },
         (error: any) => {
           console.error('Error loading translations:', error);

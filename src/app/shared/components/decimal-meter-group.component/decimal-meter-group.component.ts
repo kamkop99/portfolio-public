@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export type DecimalMeterItem = {
   label: string;
@@ -9,23 +8,22 @@ export type DecimalMeterItem = {
 
 @Component({
   selector: 'app-decimal-meter-group',
+  standalone: true,
+  imports: [],
   templateUrl: './decimal-meter-group.component.html',
-  imports: [CommonModule],
-  styleUrls: ['./decimal-meter-group.component.scss']
+  styleUrls: ['./decimal-meter-group.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DecimalMeterGroupComponent {
-  @Input() items: DecimalMeterItem[] = [];
-  @Input() max = 100;
-  @Input() decimals: 0 | 1 | 2 = 1;
+  readonly items = input<DecimalMeterItem[]>([]);
+  readonly max = input(100);
+  readonly decimals = input<0 | 1 | 2>(1);
 
   fmt(n: number): string {
-    return n.toFixed(this.decimals);
+    return n.toFixed(this.decimals());
   }
 
-  widthFor(n: number): string {
-    const w = (n / this.max) * 100;
-    return `${w}%`;
+  widthFor(n: number): number {
+    return (n / this.max()) * 100;
   }
-
-  trackByLabel = (_: number, it: DecimalMeterItem) => it.label;
 }

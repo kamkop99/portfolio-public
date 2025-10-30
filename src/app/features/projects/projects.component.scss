@@ -3,7 +3,7 @@ ul {
     padding-left: none;
 }
 
-::ng-deep .p-component.p-fieldset {
+:host ::ng-deep .p-component.p-fieldset {
     margin: 30px !important;
     border-color: var(--special-font-color-50-opacity);
     background: transparent;
@@ -11,7 +11,7 @@ ul {
     transition: transform 500ms ease;
 }
 
-::ng-deep .p-component.p-fieldset:hover {
+:host ::ng-deep .p-component.p-fieldset:hover {
     .p-fieldset-legend {
         border-color: var(--special-font-color-80-opacity) !important;
         transform: scale(1.05);
@@ -22,13 +22,13 @@ ul {
     box-shadow: 0 0 20px 0 color-mix(in srgb, var(--special-font-color) 67%, transparent);
 }
 
-::ng-deep .p-splitter-gutter {
+:host ::ng-deep .p-splitter-gutter {
     pointer-events: none;
     visibility: hidden;
     width: 10px;
 }
 
-::ng-deep .p-component.p-splitter {
+:host ::ng-deep .p-component.p-splitter {
     background: transparent;
     border: none;
 }
@@ -45,7 +45,7 @@ ul {
     height: 100%;
 }
 
-::ng-deep .p-fieldset-legend {
+:host ::ng-deep .p-fieldset-legend {
     border-color: var(--special-font-color-50-opacity) !important;
     background-color: var(--background-color) !important;
     color: var(--font-color);
@@ -85,14 +85,6 @@ ul {
 
 .techPercentage {
     margin: 20px 10px 10px;
-}
-
-::ng-deep .p-metergroup-label-text {
-    color: var(--special-font-color-50-opacity);
-}
-
-::ng-deep .p-metergroup-label-text:hover {
-    color: var(--special-font-color-80-opacity);
 }
 
 .img-panel {

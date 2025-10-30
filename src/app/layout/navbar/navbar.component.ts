@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, input, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { AboutSection } from '../../shared/models/about-model';
@@ -6,18 +6,20 @@ import { ExperienceSection } from '../../shared/models/experience-model';
 import { TranslateService } from '@ngx-translate/core';
 import { TrackService } from '../../core/services/track.service';
 import { ThemeService } from '../../core/services/theme.service';
+import { ProjectsSection } from '../../shared/models/projects-model';
 
-type Section = AboutSection | ExperienceSection;
+type Section = AboutSection | ExperienceSection | ProjectsSection;
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrl: './navbar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Navbar implements OnInit, AfterViewInit, OnDestroy {
-  @Input() sections: Section[] = [];
+  sections = input<Section[]>([]);
   activeId: string | null = null;
   private observer?: IntersectionObserver;
   private subscription!: Subscription;
@@ -63,7 +65,7 @@ export class Navbar implements OnInit, AfterViewInit, OnDestroy {
     );
 
     setTimeout(() => {
-      this.sections.forEach((it) => {
+      this.sections().forEach((it) => {
         const el = document.getElementById(it.id);
         if (el && this.observer) {
           this.observer.observe(el);

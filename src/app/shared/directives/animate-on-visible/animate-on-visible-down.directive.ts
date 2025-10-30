@@ -1,4 +1,4 @@
-import { Directive, HostBinding, ContentChild, ElementRef } from '@angular/core';
+import { Directive, HostBinding, ContentChild, ElementRef, Input } from '@angular/core';
 import { BaseAnimateOnVisible } from './base-animate-on-visible.directive';
 
 @Directive({
@@ -6,9 +6,18 @@ import { BaseAnimateOnVisible } from './base-animate-on-visible.directive';
 })
 export class AnimateOnVisibleDown extends BaseAnimateOnVisible {
 
+  @Input() delayMs = 0;
+  @Input() durationMs = 600;
+
   @HostBinding('@revealFromDown')
-  get animationState() {
-    return this.isVisible() ? 'visible' : 'hidden';
+  get animationBinding() {
+    return {
+      value: this.isVisible() ? 'visible' : 'hidden',
+      params: {
+        delay: this.delayMs,
+        duration: this.durationMs
+      }
+    };
   }
 
 }

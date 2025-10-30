@@ -14,7 +14,7 @@
 //dark mode
 :root[data-theme="dark"] {
   --theme-t: 1;
-  --background-color: #F7F7F7;
+  --background-color: #FCFBF4;
   --font-color: #0E0E10;
   --special-font-color: #004AAD;
   --special-font-color-80-opacity: color-mix(in srgb, var(--special-font-color) 80%, transparent);
@@ -24,7 +24,6 @@
   .theme-toggle .moon  { z-index: 1; }
 }
 
-//adding comment for test
 html { 
     background: var(--background-color);
     color: var(--font-color);

@@ -1,12 +1,23 @@
 <main class="content scroll-wrapper">
-  <section #section *ngFor="let s of sections" [id]="s.id" class="section" [trackSection]="s.id">
+  @for (s of sections; track trackById(s)) {
+    <section
+      #section
+      class="section"
+      [attr.id]="s.id"
+      [trackSection]="s.id"
+    >
       <div appAnimateOnVisibleDown>
-        <h2><span class="material-symbols-outlined inline-icon">{{s.icon}}</span>{{ s.title }}</h2>
+        <h2>
+          <span class="material-symbols-outlined inline-icon">{{ s.icon }}</span>
+          {{ s.title }}
+        </h2>
       </div>
+
       <div class="relative">
-      <ng-container
-        *ngComponentOutlet="getComponent(s.id); inputs: { data: s.content }"
-      ></ng-container>
+        <ng-container
+          *ngComponentOutlet="getComponent(s.id); inputs: { data: s.content }"
+        ></ng-container>
       </div>
-  </section>
+    </section>
+  }
 </main>

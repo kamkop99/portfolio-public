@@ -1,68 +1,71 @@
 <div class="projects">
-    <ul>
-        <li
-          *ngFor="let d of data"
-        >
-        <p-splitter  class="mb-8" [layout]="outerLayout">
-            <ng-template #panel>
-                <div class="flex items-center justify-center h-full">
-                    <p-splitter [panelSizes]="[60, 40]" class="mb-8" layout="vertical">
-                        <ng-template #panel>
-                            <div class="flex items-center justify-center h-full" appAnimateOnVisibleLeft>
-                                <p-fieldset>
-                                    <ng-template #header>
-                                        <div class="flex items-center gap-2 px-2">
-                                            <span class="font-bold"> {{ d.title }}</span>
-                                            <span class="separator-dot">&#9679;</span>
-                                            <span class="font-bold"> {{ d.year }}</span>
-                                        </div>
-                                    </ng-template>
-                                    <p class="m-0">
-                                        {{ d.description }}
-                                    </p>
-                                </p-fieldset>
-                            </div>
-                        </ng-template>
-                        <ng-template #panel>
-                            <div class="flex items-center justify-center techInfo">
-                                <div class="techStacks" appAnimateOnVisibleLeft>
-                                    <span class="techStack" *ngFor="let tech of d.techStack">
-                                        {{ tech }}
-                                    </span>
-                                </div>
-                                <div class="techPercentage" appAnimateOnVisibleLeft>
-                                    <app-decimal-meter-group
-                                    [items]="toMeterItems(d.techInfo)"
-                                    [max]="100"
-                                    [decimals]="1">
-                                    </app-decimal-meter-group>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </p-splitter>
-                </div>
-            </ng-template>
-            <ng-template #panel>
+  <ul>
+    @for (d of data; track $index) {
+      <li>
+        <p-splitter class="mb-8" [layout]="outerLayout">
+          <ng-template pTemplate="panel">
+            <div class="flex items-center justify-center h-full">
+              <p-splitter [panelSizes]="[60, 40]" class="mb-8" layout="vertical">
+                <ng-template pTemplate="panel">
+                  <div class="flex items-center justify-center h-full" appAnimateOnVisibleLeft>
+                    <p-fieldset>
+                      <ng-template pTemplate="header">
+                        <div class="flex items-center gap-2 px-2">
+                          <span class="font-bold">{{ d.title }}</span>
+                          <span class="separator-dot">&#9679;</span>
+                          <span class="font-bold">{{ d.year }}</span>
+                        </div>
+                      </ng-template>
+                      <p class="m-0">
+                        {{ d.description }}
+                      </p>
+                    </p-fieldset>
+                  </div>
+                </ng-template>
+
+                <ng-template pTemplate="panel">
+                  <div class="flex items-center justify-center techInfo">
+                    <div class="techStacks" appAnimateOnVisibleLeft>
+                      @for (tech of d.techStack; track $index) {
+                        <span class="techStack">{{ tech }}</span>
+                      }
+                    </div>
+
+                    <div class="techPercentage" appAnimateOnVisibleLeft>
+                      <app-decimal-meter-group
+                        [items]="toMeterItems(d.techInfo)"
+                        [max]="100"
+                        [decimals]="1">
+                      </app-decimal-meter-group>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-splitter>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="panel">
             <div class="img-panel" appAnimateOnVisibleRight>
-                <div class="image-card">
-                <img [src]="d.imageURL" alt="Preview image" class="image-fit" />
+              <div class="image-card">
+                <img [src]="d.imageURL" alt="{{ d.title }}" class="image-fit" />
 
                 <div class="overlay">
+                  @if (d.githubURL) {
                     <a
-                    *ngIf="d.githubURL"
-                    pButton
-                    label="{{ 'headings.githubButton' | translate }}"
-                    icon="pi pi-github"
-                    class="p-button-rounded p-button-outlined overlay-btn"
-                    [href]="d.githubURL"
-                    target="_blank"
-                    rel="noopener noreferrer">
+                      pButton
+                      icon="pi pi-github"
+                      class="p-button-rounded p-button-outlined overlay-btn"
+                      [href]="d.githubURL!"
+                      target="_blank"
+                      rel="noopener noreferrer">{{ 'headings.githubButton' | translate }}
                     </a>
+                  }
                 </div>
-                </div>
+              </div>
             </div>
-            </ng-template>
+          </ng-template>
         </p-splitter>
-        </li>
-      </ul>
+      </li>
+    }
+  </ul>
 </div>

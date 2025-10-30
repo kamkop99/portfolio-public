@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
 import { ProjectItem } from '../../shared/models/projects-model';
 import { SplitterModule } from 'primeng/splitter';
 import { FieldsetModule } from 'primeng/fieldset';
@@ -16,10 +15,11 @@ import { TechColorService } from '../../core/services/tech-color.service';
 
 @Component({
   selector: 'app-projects',
-  imports: [CommonModule, SplitterModule, FieldsetModule, MeterGroupModule, AnimateOnVisibleRight, AnimateOnVisibleLeft, ButtonModule, TranslateModule, DecimalMeterGroupComponent],
+  imports: [SplitterModule, FieldsetModule, MeterGroupModule, AnimateOnVisibleRight, AnimateOnVisibleLeft, ButtonModule, TranslateModule, DecimalMeterGroupComponent],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
-  animations: animations
+  animations: animations,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Projects implements OnDestroy {
   @Input() data: ProjectItem [] = [];
@@ -42,7 +42,7 @@ export class Projects implements OnDestroy {
   toMeterItems(techInfo: Record<string, string>) {
     const list = Object.entries(techInfo).map(([label, s]) => ({
       label,
-      value: parseFloat(s),
+      value: Number.parseFloat(s),
       color: this.getColorForTech(label)
     }));
 

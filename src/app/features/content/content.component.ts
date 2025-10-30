@@ -1,58 +1,99 @@
-import { Component, Input, Type, ElementRef, ViewChildren, QueryList}  from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Experience } from '../experience/experience.component';
-import { animations } from '../../shared/models/animations-model';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  Input,
+  OnDestroy,
+  QueryList,
+  Type,
+  ViewChildren,
+  inject,
+} from '@angular/core';
+import { NgComponentOutlet } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { AnimateOnVisibleDown } from '../../shared/directives/animate-on-visible/animate-on-visible-down.directive';
-import { Projects } from '../projects/projects.component';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { OnInit } from '@angular/core';
 import { TrackSection } from '../../shared/directives/track-section/track-section.directive';
 import { About } from '../about/about.component';
-
+import { Experience } from '../experience/experience.component';
+import { Projects } from '../projects/projects.component';
+import { animations } from '../../shared/models/animations-model';
+import { SectionModel } from '../../shared/models/section-model';
 
 @Component({
   selector: 'app-content',
+  standalone: true,
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss',
-  imports: [CommonModule, AnimateOnVisibleDown, TrackSection, RouterModule],
-  animations: animations
+  imports: [AnimateOnVisibleDown, TrackSection, NgComponentOutlet],
+  animations,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Content implements OnInit {
-  @Input() sections: any[] = [];
-  private currentFragment: string | null = null;
+export class Content implements AfterViewInit, OnDestroy {
+  @Input({ required: true }) sections: SectionModel[] = [];
 
-  componentMap: { [key: string]: Type<any> } = {
+  private readonly route = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
+
+  private readonly componentMap: Record<string, Type<unknown>> = {
     about: About,
     experience: Experience,
-    projects: Projects
+    projects: Projects,
   };
 
-  @ViewChildren('section') sectionElements!: QueryList<ElementRef>;
+  @ViewChildren('section', { read: ElementRef })
+  private readonly sectionEls!: QueryList<ElementRef<HTMLElement>>;
 
-  constructor(private route: ActivatedRoute) {}
+  private fragmentSub?: import('rxjs').Subscription;
+  private changesSub?: import('rxjs').Subscription;
 
-  getComponent(componentId: string): Type<any> | null {
-    return this.componentMap[componentId] || null;
+  trackById = (s: SectionModel) => s.id;
+
+  getComponent(componentId: string): Type<unknown> | null {
+    return this.componentMap[componentId] ?? null;
   }
-  ngOnInit() {
-    this.route.fragment.subscribe(fragment => {
-      this.currentFragment = fragment;
-      this.scrollToFragment();
+
+  constructor() {
+    this.fragmentSub = this.route.fragment.subscribe(() => {
+      queueMicrotask(() => this.scheduleScroll());
+    });
+
+    this.destroyRef.onDestroy(() => {
+      this.fragmentSub?.unsubscribe();
+      this.changesSub?.unsubscribe();
     });
   }
 
-  ngAfterViewInit() {
-    this.sectionElements.changes.subscribe(() => {
-      this.scrollToFragment();
-    });
+  ngAfterViewInit(): void {
+    this.changesSub = this.sectionEls.changes.subscribe(() => this.scheduleScroll());
+
+    queueMicrotask(() => this.scheduleScroll());
   }
 
-  private scrollToFragment(): void {
-    if (!this.currentFragment || !this.sectionElements?.length) return;
-    
-    const element = this.sectionElements.toArray().find(
-      el => el.nativeElement.id === this.currentFragment
-    );
-    element?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  ngOnDestroy(): void {
+    this.fragmentSub?.unsubscribe();
+    this.changesSub?.unsubscribe();
+  }
+
+  private scheduleScroll(): void {
+    const fragment = this.route.snapshot.fragment;
+    if (!fragment) return;
+    requestAnimationFrame(() => this.tryScroll(fragment));
+  }
+
+  private tryScroll(fragment: string, retries = 10): void {
+    const el =
+      document.getElementById(fragment) ??
+      this.sectionEls?.toArray().find((r) => r.nativeElement.id === fragment)?.nativeElement;
+
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    if (retries > 0) {
+      requestAnimationFrame(() => this.tryScroll(fragment, retries - 1));
+    }
   }
 }

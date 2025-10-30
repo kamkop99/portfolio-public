@@ -1,0 +1,64 @@
+<div class="connector" #connector [class.filled]="filled()">
+  <div class="line" [class.left]="isLeft()" [class.right]="!isLeft()"></div>
+  <div class="dot"  [class.left]="isLeft()" [class.right]="!isLeft()" #dot></div>
+</div>
+
+<div class="glow-wrapper" #card>
+  <p-card>
+    <div class="header">
+      <span class="orange">{{ getYear(exp.fromDate) }}-{{ getYear(exp.toDate) }}</span>
+      &nbsp;
+      <span class="time-experience">
+        @if (getDateDiff(exp.fromDate, exp.toDate); as diff) {
+          {{ diff.y | timeUnit:'year' }}
+          {{ diff.m | timeUnit:'month' }}
+        }
+      </span>
+    </div>
+
+    <h3 class="title">
+      {{ exp.title }}
+      <div class="animated-line"></div>
+    </h3>
+    <br />
+
+    <div class="companyInfo" aria-label="Company and location">
+      <div>{{ exp.company }}</div>
+      <div class="separator" aria-hidden="true">&#9679;</div>
+      <div>{{ exp.country }}</div>
+    </div>
+
+    <div>
+      @for (description of exp.description; track $index) {
+        <p
+          class="description"
+          appAnimateOnVisibleSideDirective
+          [direction]="isLeft() ? 'left' : 'right'">
+          <span class="inline-icon material-icons" aria-hidden="true">keyboard_arrow_right</span>
+
+          @if (findDoi(description); as doiLink) {
+            {{ doiLink.preDoiText }}
+            <a [href]="doiLink.link" target="_blank" rel="noopener noreferrer">
+              {{ doiLink.doiText }}
+            </a>
+            {{ doiLink.postDoiText }}
+          } @else {
+            {{ description }}
+          }
+        </p>
+      }
+    </div>
+
+    <div class="technologies">
+      @for (technology of (exp.technologies ?? []); track $index) {
+        <span
+          class="technology"
+          appAnimateOnVisibleDown
+          [delayMs]="$index * 120"
+          [durationMs]="600">
+          {{ technology }}
+        </span>
+      }
+    </div>
+  </p-card>
+</div>

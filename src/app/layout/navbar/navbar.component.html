@@ -45,7 +45,7 @@
       <nav class="sidebar-nav">
         <ul>
           <li
-            *ngFor="let s of sections"
+            *ngFor="let s of sections()"
             [class.active]="isActive(s.id)"
             (click)="scrollTo(s.id)"
             [attr.aria-current]="isActive(s.id) ? 'location' : null"
@@ -83,7 +83,7 @@
   <nav class="overlay-nav" (click)="$event.stopPropagation()">
     <ul>
       <li
-        *ngFor="let s of sections"
+        *ngFor="let s of sections()"
         [class.active]="isActive(s.id)"
         (click)="scrollTo(s.id); menuOpen = false"
         [attr.aria-current]="isActive(s.id) ? 'location' : null"

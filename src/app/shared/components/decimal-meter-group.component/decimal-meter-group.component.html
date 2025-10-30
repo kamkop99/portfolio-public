@@ -1,18 +1,21 @@
 <div class="dm-group stacked">
   <div class="dm-track">
-    <div class="dm-fill"
-         *ngFor="let it of items; trackBy: trackByLabel"
-         [style.width.%]="it.value"
-         [style.background]="it.color || ''"
-         [attr.title]="it.label + ' ' + (it.value | number:'1.0-1') + '%'">
-    </div>
+    @for (it of items(); track it.label) {
+      <div
+        class="dm-fill"
+        [style.width.%]="widthFor(it.value)"
+        [style.background]="it.color || ''"
+        [attr.title]="it.label + ' ' + fmt(it.value) + '%'"
+      ></div>
+    }
   </div>
 
   <div class="dm-legend">
-    <span class="dm-leg-item"
-          *ngFor="let it of items; trackBy: trackByLabel">
-      <span class="dm-leg-color" [style.background]="it.color || ''"></span>
-      {{ it.label }} ({{ it.value | number:'1.0-1' }}%)
-    </span>
+    @for (it of items(); track it.label) {
+      <span class="dm-leg-item">
+        <span class="dm-leg-color" [style.background]="it.color || ''"></span>
+        {{ it.label }} ({{ fmt(it.value) }}%)
+      </span>
+    }
   </div>
 </div>
