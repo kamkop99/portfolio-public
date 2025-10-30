@@ -14,10 +14,10 @@
   <ng-template #content let-exp>
     @if (exp.reached) {
       @if (exp.__id % 2 !== 0) {
-      <app-experience-card [exp]="exp" side="left" appAnimateOnVisibleLeft class="left animated-wrapper">
+      <app-experience-card [exp]="exp" side="left" appAnimateOnVisibleSideDirective class="left animated-wrapper">
       </app-experience-card>
       } @else {
-      <app-experience-card [exp]="exp" side="right" appAnimateOnVisibleRight class="right animated-wrapper">
+      <app-experience-card [exp]="exp" side="right" appAnimateOnVisibleSideDirective class="right animated-wrapper">
       </app-experience-card>
       }
     }

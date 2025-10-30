@@ -1,9 +1,8 @@
 import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
-import { ExtraOptions, provideRouter, withHashLocation, withRouterConfig } from '@angular/router';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ExtraOptions, provideRouter, withRouterConfig } from '@angular/router';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { providePrimeNG } from 'primeng/config';
@@ -23,8 +22,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideAnimationsAsync(),
-    provideAnimations(),
     provideHttpClient(),
     providePrimeNG({
         theme: { preset: Aura, options: { darkModeSelector: '.p-dark' } },
@@ -38,6 +35,7 @@ export const appConfig: ApplicationConfig = {
         },
       })
     ),
-    provideRouter(routes),
+    provideRouter(routes, withRouterConfig(routerOptions)),
+    provideNoopAnimations()
   ]
 };

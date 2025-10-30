@@ -1,23 +1,25 @@
-import { Directive, HostBinding, ContentChild, ElementRef, Input } from '@angular/core';
+import { Directive, HostBinding, input } from '@angular/core';
 import { BaseAnimateOnVisible } from './base-animate-on-visible.directive';
 
 @Directive({
-  selector: '[appAnimateOnVisibleDown]'
+  selector: '[appAnimateOnVisibleDown]',
+  standalone: true,
 })
 export class AnimateOnVisibleDown extends BaseAnimateOnVisible {
+  readonly distance = input<string>('100px');
+  readonly durationMs = input<number>(600);
+  readonly delayMs = input<number>(0);
 
-  @Input() delayMs = 0;
-  @Input() durationMs = 600;
+  @HostBinding('class.reveal') baseRevealClass = true;
+  @HostBinding('class.reveal-down') downClass = true;
 
-  @HostBinding('@revealFromDown')
-  get animationBinding() {
-    return {
-      value: this.isVisible() ? 'visible' : 'hidden',
-      params: {
-        delay: this.delayMs,
-        duration: this.durationMs
-      }
-    };
+  @HostBinding('style.--distance') get cssDistance() {
+    return this.distance();
   }
-
+  @HostBinding('style.--duration') get cssDuration() {
+    return `${this.durationMs()}ms`;
+  }
+  @HostBinding('style.--delay') get cssDelay() {
+    return `${this.delayMs()}ms`;
+  }
 }

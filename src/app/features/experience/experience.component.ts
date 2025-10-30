@@ -1,13 +1,10 @@
-import { Component, HostListener, ViewChildren, ElementRef, QueryList, ViewChild, OnDestroy, computed, input, ChangeDetectionStrategy, DestroyRef, inject, InputSignal } from '@angular/core';
-import { animations } from '../../shared/models/animations-model';
+import { Component, HostListener, ViewChildren, ElementRef, QueryList, ViewChild, computed, input, ChangeDetectionStrategy, DestroyRef, inject, InputSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
 import { ExperienceItem } from '../../shared/models/experience-model';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs';
-import { AnimateOnVisibleRight } from '../../shared/directives/animate-on-visible/animate-on-visible-right.directive';
-import { AnimateOnVisibleLeft } from '../../shared/directives/animate-on-visible/animate-on-visible-left.directive';
 import { ExperienceCardComponent } from './experience-card/experience-card.component/experience-card.component';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -15,11 +12,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-experience',
   standalone: true,
-  imports: [FormsModule, TimelineModule, CardModule, AnimateOnVisibleRight, AnimateOnVisibleLeft, ExperienceCardComponent, CommonModule],
+  imports: [FormsModule, TimelineModule, CardModule, ExperienceCardComponent, CommonModule],
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: animations
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Experience {
   private readonly destroyRef = inject(DestroyRef);
@@ -43,7 +39,7 @@ export class Experience {
   @ViewChildren(ExperienceCardComponent) cards!: QueryList<ExperienceCardComponent>;
   @ViewChild('timelineContainer') timelineContainer!: ElementRef;
 
-  constructor(private bp: BreakpointObserver) {
+  constructor(private readonly bp: BreakpointObserver) {
     this.bp.observe('(max-width: 1550px)')
       .pipe(
         map(r => r.matches),
@@ -68,6 +64,8 @@ export class Experience {
     const timelineTop = timelineEl.getBoundingClientRect().top + window.scrollY;
     const fillHeight = fillEl.offsetHeight;
 
-    this.cards?.forEach(card => card.updateFill(timelineTop, fillHeight));
+    for (const card of this.cards.toArray()) {
+      card.updateFill(timelineTop, fillHeight);
+    }
   }
 }

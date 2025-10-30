@@ -1,25 +1,27 @@
 <div class="about">
     <div class="two-col">
         <div>
-            <p appAnimateOnVisibleLeft
-                class="intro" >{{ data.intro }} <span class="fullName">{{ data.full_name }}</span></p>
-            <p appAnimateOnVisibleLeft
-            ><span class="inline-icon material-symbols-outlined">code</span>{{ data.position }}</p>
-            <p appAnimateOnVisibleLeft><span class="inline-icon material-icons">work_history</span>{{ data.work_experience }}</p>
-            <p appAnimateOnVisibleLeft><span class="inline-icon material-symbols-outlined">location_on</span>{{ data.localization }}</p>
-            <p appAnimateOnVisibleLeft class="description">{{ data.short_description }}</p>
-            <p appAnimateOnVisibleLeft class="titles"> {{ 'headings.interests' | translate}}</p>
+            <p appAnimateOnVisibleSideDirective [direction]="'left'"
+                class="intro" >{{ data().intro }} <span class="fullName">{{ data().full_name }}</span></p>
+            <p appAnimateOnVisibleSideDirective [direction]="'left'"
+            ><span class="inline-icon material-symbols-outlined">code</span>{{ data().position }}</p>
+            <p appAnimateOnVisibleSideDirective [direction]="'left'"><span class="inline-icon material-icons">work_history</span>{{ data().work_experience }}</p>
+            <p appAnimateOnVisibleSideDirective [direction]="'left'"><span class="inline-icon material-symbols-outlined">location_on</span>{{ data().localization }}</p>
+            <p appAnimateOnVisibleSideDirective [direction]="'left'" class="description">{{ data().short_description }}</p>
+            <p appAnimateOnVisibleSideDirective [direction]="'left'" class="titles"> {{ 'headings.interests' | translate}}</p>
             <div class="interests">
-                <p class="interest" *ngFor="let interest of  data.interests" appAnimateOnVisibleLeft>
-                    <span class="inline-icon material-icons arrow">keyboard_arrow_right</span> {{ interest }}
-                </p>
+                @for (interest of data().interests; track $index) {
+                    <p class="interest" appAnimateOnVisibleSideDirective [direction]="'left'">
+                        <span class="inline-icon material-icons arrow">keyboard_arrow_right</span> {{ interest }}
+                    </p>
+                }
             </div>
         </div>
         <div>
-            <p appAnimateOnVisibleRight class="titles">{{ 'headings.skills' | translate}}</p>
-            <p appAnimateOnVisibleRight class="margins">{{ 'headings.backend' | translate}}</p>
+            <p appAnimateOnVisibleSideDirective [direction]="'right'" class="titles">{{ 'headings.skills' | translate}}</p>
+            <p appAnimateOnVisibleSideDirective [direction]="'right'" class="margins">{{ 'headings.backend' | translate}}</p>
             <div class="skills">
-                @for (skill of data.backend; track $index) {
+                @for (skill of data().backend; track $index) {
                     <span
                     class="skill"
                     appAnimateOnVisibleDown
@@ -29,9 +31,9 @@
                     </span>
                 }
             </div>
-            <p appAnimateOnVisibleRight class="margins">{{ 'headings.frontend' | translate}}</p>
+            <p appAnimateOnVisibleSideDirective [direction]="'right'" class="margins">{{ 'headings.frontend' | translate}}</p>
             <div class="skills">
-                @for (skill of data.frontend; track $index) {
+                @for (skill of data().frontend; track $index) {
                     <span
                     class="skill"
                     appAnimateOnVisibleDown
@@ -41,13 +43,15 @@
                     </span>
                 }
             </div>
-            <p appAnimateOnVisibleRight class="titles">{{ 'headings.tools' | translate}}</p>
+            <p appAnimateOnVisibleSideDirective [direction]="'right'" class="titles">{{ 'headings.tools' | translate}}</p>
             <div class="tools">
-                <p class="tool" *ngFor="let tool of  data.used_tools" appAnimateOnVisibleRight>
-                    <span class="inline-icon material-icons arrow">keyboard_arrow_right</span> {{ tool }}
-                </p>
+                @for (tool of  data().used_tools; track $index) {
+                    <p class="tool" appAnimateOnVisibleSideDirective [direction]="'right'">
+                        <span class="inline-icon material-icons arrow">keyboard_arrow_right</span> {{ tool }}
+                    </p>
+                }
             </div>
-            <p appAnimateOnVisibleRight class="titles">{{ 'headings.contact' | translate}}: </p>
+            <p appAnimateOnVisibleSideDirective [direction]="'right'" class="titles">{{ 'headings.contact' | translate}}: </p>
             <div class="contact">
                 <div appAnimateOnVisibleDown class="block-icon" (click)="copyToClipboard('bruxic99')">
                     <p-toast></p-toast>

@@ -1,108 +1,123 @@
 <div class="nav-content">
-  <a href="/" class="logo">
+  <a href="/" class="logo" aria-label="Home">
     <span class="material-symbols-outlined">home</span>
   </a>
 
-
-  <div style="display: inline-flex;">
+  <div class="inline-actions">
+    @if (!menuOpen()) {
       <button
-      *ngIf="!menuOpen"
-      type="button"
-      class="lang-switch-mobile"
-      (click)="toggleLang()"
-      [attr.aria-label]="'Switch to ' + (currentLang === 'pl' ? 'English' : 'Polish')"
-    >
-      <img
-        [src]="currentLang === 'pl' ? flags.en : flags.pl"
-        width="28"
-        height="28"
-        [alt]="currentLang === 'pl' ? 'English flag' : 'Polish flag'"
-      />
-    </button>
+        type="button"
+        class="lang-switch-mobile"
+        (click)="toggleLang()
+        "
+        [attr.aria-label]="'Switch to ' + (currentLang() === 'pl' ? 'English' : 'Polish')"
+      >
+        <img
+          [src]="currentLang() === 'pl' ? flags.en : flags.pl"
+          width="28"
+          height="28"
+          [alt]="currentLang() === 'pl' ? 'English flag' : 'Polish flag'"
+        />
+      </button>
+    }
+
     <button
       type="button"
       class="theme-toggle-mobile"
       (click)="onToggleTheme()"
-      [attr.aria-label]="'Switch to ' + (isDark ? 'light' : 'dark') + ' theme'">
+      [attr.aria-label]="'Switch to ' + (isDark ? 'light' : 'dark') + ' theme'"
+    >
       <span class="icon-wrap">
         <span class="material-symbols-outlined icon sun" aria-hidden="true">light_mode</span>
         <span class="material-symbols-outlined icon moon" aria-hidden="true">dark_mode</span>
       </span>
     </button>
+
     <button
       type="button"
       class="burger"
       aria-label="Toggle navigation"
-      [attr.aria-expanded]="menuOpen"
+      [attr.aria-expanded]="menuOpen()"
       (click)="toggleMenu()"
     >
-      <span class="material-symbols-outlined" *ngIf="!menuOpen">menu</span>
-      <span class="material-symbols-outlined close-burger" *ngIf="menuOpen">close</span>
+      @if (!menuOpen()) {
+        <span class="material-symbols-outlined">menu</span>
+      } @else {
+        <span class="material-symbols-outlined close-burger">close</span>
+      }
     </button>
   </div>
 
   <div class="right-group">
-      <nav class="sidebar-nav">
-        <ul>
+    <nav class="sidebar-nav">
+      <ul>
+        @for (s of sections(); track s.id) {
           <li
-            *ngFor="let s of sections()"
             [class.active]="isActive(s.id)"
-            (click)="scrollTo(s.id)"
+            (click)="onNavItemClick(s.id)"
             [attr.aria-current]="isActive(s.id) ? 'location' : null"
           >
-            <ng-container *ngIf="s.title !== 'Home'"><b>{{ s.title }}</b></ng-container>
+            @if (s.title !== 'Home') {
+              <b>{{ s.title }}</b>
+            }
           </li>
-        </ul>
-      </nav>
+        }
+      </ul>
+    </nav>
 
-      <button
-        type="button"
-        class="lang-switch"
-        (click)="toggleLang()"
-        [attr.aria-label]="'Switch to ' + (currentLang === 'pl' ? 'English' : 'Polish')"
-      >
-        <img
-          [src]="currentLang === 'pl' ? flags.en : flags.pl"
-          width="24"
-          height="24"
-          [alt]="currentLang === 'pl' ? 'English flag' : 'Polish flag'"
-        />
-      </button>
-      <button
-        type="button"
-        class="theme-toggle"
-        (click)="onToggleTheme()"
-        [attr.aria-label]="'Switch to ' + (isDark ? 'light' : 'dark') + ' theme'">
-        <span class="material-symbols-outlined icon sun" aria-hidden="true">light_mode</span>
-        <span class="material-symbols-outlined icon moon" aria-hidden="true">dark_mode</span>
-      </button>
-    </div>
+    <button
+      type="button"
+      class="lang-switch"
+      (click)="toggleLang()"
+      [attr.aria-label]="'Switch to ' + (currentLang() === 'pl' ? 'English' : 'Polish')"
+    >
+      <img
+        [src]="currentLang() === 'pl' ? flags.en : flags.pl"
+        width="24"
+        height="24"
+        [alt]="currentLang() === 'pl' ? 'English flag' : 'Polish flag'"
+      />
+    </button>
+
+    <button
+      type="button"
+      class="theme-toggle"
+      (click)="onToggleTheme()"
+      [attr.aria-label]="'Switch to ' + (isDark ? 'light' : 'dark') + ' theme'"
+    >
+      <span class="material-symbols-outlined icon sun" aria-hidden="true">light_mode</span>
+      <span class="material-symbols-outlined icon moon" aria-hidden="true">dark_mode</span>
+    </button>
   </div>
+</div>
 
-  <div class="overlay" [class.open]="menuOpen" (click)="toggleMenu()">
+<div class="overlay" [class.open]="menuOpen()" (click)="closeMenu()">
   <nav class="overlay-nav" (click)="$event.stopPropagation()">
     <ul>
-      <li
-        *ngFor="let s of sections()"
-        [class.active]="isActive(s.id)"
-        (click)="scrollTo(s.id); menuOpen = false"
-        [attr.aria-current]="isActive(s.id) ? 'location' : null"
-      >
-        <ng-container *ngIf="s.title !== 'Home'"><b>{{ s.title }}</b></ng-container>
-      </li>
+      @for (s of sections(); track s.id) {
+        <li
+          [class.active]="isActive(s.id)"
+          (click)="onNavItemClick(s.id)"
+          [attr.aria-current]="isActive(s.id) ? 'location' : null"
+        >
+          @if (s.title !== 'Home') {
+            <b>{{ s.title }}</b>
+          }
+        </li>
+      }
     </ul>
 
     <button
       type="button"
       class="lang-switch"
       (click)="toggleLang()"
-      [attr.aria-label]="'Switch to ' + (currentLang === 'pl' ? 'English' : 'Polish')"
+      [attr.aria-label]="'Switch to ' + (currentLang() === 'pl' ? 'English' : 'Polish')"
     >
       <img
-        [src]="currentLang === 'pl' ? flags.en : flags.pl"
+        [src]="currentLang() === 'pl' ? flags.en : flags.pl"
         width="28"
         height="28"
-        [alt]="currentLang === 'pl' ? 'English flag' : 'Polish flag'"
+        [alt]="currentLang() === 'pl' ? 'English flag' : 'Polish flag'"
       />
     </button>
   </nav>

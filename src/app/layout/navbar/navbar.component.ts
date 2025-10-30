@@ -1,104 +1,116 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, input, Input, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
-import { AboutSection } from '../../shared/models/about-model';
-import { ExperienceSection } from '../../shared/models/experience-model';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+  input,
+  signal,
+  effect,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { TrackService } from '../../core/services/track.service';
 import { ThemeService } from '../../core/services/theme.service';
-import { ProjectsSection } from '../../shared/models/projects-model';
-
-type Section = AboutSection | ExperienceSection | ProjectsSection;
+import { TrackService } from '../../core/services/track.service';
+import { SectionModel } from '../../shared/models/section-model';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./navbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navbar implements OnInit, AfterViewInit, OnDestroy {
-  sections = input<Section[]>([]);
-  activeId: string | null = null;
-  private observer?: IntersectionObserver;
-  private subscription!: Subscription;
+  readonly sections = input<SectionModel[]>([]);
 
-  currentLang: 'pl' | 'en' = 'pl';
-  menuOpen = false;
+  readonly menuOpen = signal(false);
+  readonly currentLang = signal<'pl' | 'en'>('pl');
+  readonly activeId = signal<string | null>(null);
+
+  private readonly translate = inject(TranslateService);
+  private readonly themeService = inject(ThemeService);
+  private readonly trackService = inject(TrackService);
+
+  private observer?: IntersectionObserver;
 
   readonly flags = {
     en: 'flags/en.svg',
     pl: 'flags/pl.svg',
   } as const;
 
-  constructor(
-    private translate: TranslateService,
-    private trackService: TrackService,
-    private themeService: ThemeService
-  ) {
-    this.translate.setDefaultLang(this.currentLang);
-    this.translate.use(this.currentLang);
+  constructor() {
+    this.translate.setDefaultLang(this.currentLang());
+    this.translate.use(this.currentLang());
+
+    effect(() => {
+      const id = this.trackService.activeSectionSig?.() ?? '';
+      if (id) this.activeId.set(id);
+    });
   }
-  
+
   ngOnInit(): void {
-      this.subscription = this.trackService.activeSection$.subscribe(
-        (sectionId) => {
-          this.activeId = sectionId;
-        }
-      );
-      this.themeService.init();
+    this.themeService.init();
   }
-  
-  ngAfterViewInit() {
+
+  ngAfterViewInit(): void {
     this.observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
+        for (const e of entries) {
           if (e.isIntersecting) {
-            this.activeId = e.target.id;
+            const id = e.target.id;
+            this.activeId.set(id);
+            this.trackService.setActiveSection(id);
           }
-        });
+        }
       },
-      {
-        threshold: 0.5,
-      }
+      { threshold: 0.5 }
     );
 
-    setTimeout(() => {
+    queueMicrotask(() => {
       this.sections().forEach((it) => {
         const el = document.getElementById(it.id);
-        if (el && this.observer) {
-          this.observer.observe(el);
-        }
+        if (el) this.observer!.observe(el);
       });
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.observer?.disconnect();
-    this.subscription?.unsubscribe();
   }
 
-  scrollTo(id: string) {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  toggleMenu(): void {
+    this.menuOpen.update((v) => !v);
   }
 
-  isActive(id: string) {
-    return this.activeId === id;
+  closeMenu(): void {
+    this.menuOpen.set(false);
   }
 
   toggleLang(): void {
-    this.currentLang = this.currentLang === 'pl' ? 'en' : 'pl';
-    this.translate.use(this.currentLang);
-  }
-    toggleMenu(): void {
-    this.menuOpen = !this.menuOpen;
+    const next = this.currentLang() === 'pl' ? 'en' : 'pl';
+    this.currentLang.set(next);
+    this.translate.use(next);
   }
 
-  onToggleTheme() { this.themeService.toggleWithTransition(); }
+  onToggleTheme(): void {
+    this.themeService.toggleWithTransition();
+  }
+
+  scrollTo(id: string): void {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  onNavItemClick(id: string): void {
+    this.scrollTo(id);
+    this.closeMenu();
+  }
+
+  isActive(id: string): boolean {
+    return this.activeId() === id;
+  }
 
   get isDark(): boolean {
     return document.documentElement.getAttribute('data-theme') === 'dark';

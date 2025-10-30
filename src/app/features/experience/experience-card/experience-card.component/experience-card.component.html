@@ -6,10 +6,10 @@
 <div class="glow-wrapper" #card>
   <p-card>
     <div class="header">
-      <span class="orange">{{ getYear(exp.fromDate) }}-{{ getYear(exp.toDate) }}</span>
+      <span class="orange">{{ getYear(exp().fromDate) }}-{{ getYear(exp().toDate) }}</span>
       &nbsp;
       <span class="time-experience">
-        @if (getDateDiff(exp.fromDate, exp.toDate); as diff) {
+        @if (getDateDiff(exp().fromDate, exp().toDate); as diff) {
           {{ diff.y | timeUnit:'year' }}
           {{ diff.m | timeUnit:'month' }}
         }
@@ -17,19 +17,19 @@
     </div>
 
     <h3 class="title">
-      {{ exp.title }}
+      {{ exp().title }}
       <div class="animated-line"></div>
     </h3>
     <br />
 
     <div class="companyInfo" aria-label="Company and location">
-      <div>{{ exp.company }}</div>
+      <div>{{ exp().company }}</div>
       <div class="separator" aria-hidden="true">&#9679;</div>
-      <div>{{ exp.country }}</div>
+      <div>{{ exp().country }}</div>
     </div>
 
     <div>
-      @for (description of exp.description; track $index) {
+      @for (description of exp().description; track $index) {
         <p
           class="description"
           appAnimateOnVisibleSideDirective
@@ -50,7 +50,7 @@
     </div>
 
     <div class="technologies">
-      @for (technology of (exp.technologies ?? []); track $index) {
+      @for (technology of exp().technologies; track $index) {
         <span
           class="technology"
           appAnimateOnVisibleDown

@@ -5,7 +5,6 @@ import {
   DestroyRef,
   ElementRef,
   Input,
-  OnDestroy,
   QueryList,
   Type,
   ViewChildren,
@@ -18,8 +17,9 @@ import { TrackSection } from '../../shared/directives/track-section/track-sectio
 import { About } from '../about/about.component';
 import { Experience } from '../experience/experience.component';
 import { Projects } from '../projects/projects.component';
-import { animations } from '../../shared/models/animations-model';
 import { SectionModel } from '../../shared/models/section-model';
+import { Subscription } from 'rxjs/internal/Subscription';
+
 
 @Component({
   selector: 'app-content',
@@ -27,10 +27,9 @@ import { SectionModel } from '../../shared/models/section-model';
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss',
   imports: [AnimateOnVisibleDown, TrackSection, NgComponentOutlet],
-  animations,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Content implements AfterViewInit, OnDestroy {
+export class Content implements AfterViewInit {
   @Input({ required: true }) sections: SectionModel[] = [];
 
   private readonly route = inject(ActivatedRoute);
@@ -45,8 +44,8 @@ export class Content implements AfterViewInit, OnDestroy {
   @ViewChildren('section', { read: ElementRef })
   private readonly sectionEls!: QueryList<ElementRef<HTMLElement>>;
 
-  private fragmentSub?: import('rxjs').Subscription;
-  private changesSub?: import('rxjs').Subscription;
+  private readonly fragmentSub: Subscription;
+  private changesSub?: Subscription;
 
   trackById = (s: SectionModel) => s.id;
 
@@ -69,11 +68,6 @@ export class Content implements AfterViewInit, OnDestroy {
     this.changesSub = this.sectionEls.changes.subscribe(() => this.scheduleScroll());
 
     queueMicrotask(() => this.scheduleScroll());
-  }
-
-  ngOnDestroy(): void {
-    this.fragmentSub?.unsubscribe();
-    this.changesSub?.unsubscribe();
   }
 
   private scheduleScroll(): void {

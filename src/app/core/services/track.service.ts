@@ -1,19 +1,17 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrackService {
-  private activeSectionSource = new BehaviorSubject<string>('');
-  activeSection$: Observable<string> = this.activeSectionSource.asObservable();
+  readonly activeSectionSig = signal<string>('');
 
   constructor(private location: Location) {}
 
   setActiveSection(sectionId: string) {
-    this.activeSectionSource.next(sectionId);
-    const basePath = this.location.path(false); 
+    this.activeSectionSig.set(sectionId);
+    const basePath = this.location.path(false);
     this.location.replaceState(`${basePath}#${sectionId}`);
   }
 }

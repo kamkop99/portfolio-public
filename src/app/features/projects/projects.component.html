@@ -7,7 +7,7 @@
             <div class="flex items-center justify-center h-full">
               <p-splitter [panelSizes]="[60, 40]" class="mb-8" layout="vertical">
                 <ng-template pTemplate="panel">
-                  <div class="flex items-center justify-center h-full" appAnimateOnVisibleLeft>
+                  <div class="flex items-center justify-center h-full" appAnimateOnVisibleSideDirective [direction]="'left'">
                     <p-fieldset>
                       <ng-template pTemplate="header">
                         <div class="flex items-center gap-2 px-2">
@@ -25,13 +25,13 @@
 
                 <ng-template pTemplate="panel">
                   <div class="flex items-center justify-center techInfo">
-                    <div class="techStacks" appAnimateOnVisibleLeft>
+                    <div class="techStacks" appAnimateOnVisibleSideDirective [direction]="'left'">
                       @for (tech of d.techStack; track $index) {
                         <span class="techStack">{{ tech }}</span>
                       }
                     </div>
 
-                    <div class="techPercentage" appAnimateOnVisibleLeft>
+                    <div class="techPercentage" appAnimateOnVisibleSideDirective [direction]="'left'">
                       <app-decimal-meter-group
                         [items]="toMeterItems(d.techInfo)"
                         [max]="100"
@@ -45,7 +45,7 @@
           </ng-template>
 
           <ng-template pTemplate="panel">
-            <div class="img-panel" appAnimateOnVisibleRight>
+            <div class="img-panel" appAnimateOnVisibleSideDirective [direction]="'right'">
               <div class="image-card">
                 <img [src]="d.imageURL" alt="{{ d.title }}" class="image-fit" />
 

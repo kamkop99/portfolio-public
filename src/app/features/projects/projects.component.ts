@@ -4,21 +4,18 @@ import { SplitterModule } from 'primeng/splitter';
 import { FieldsetModule } from 'primeng/fieldset';
 import { MeterGroupModule } from 'primeng/metergroup';
 import { ButtonModule } from 'primeng/button';
-import { AnimateOnVisibleLeft } from '../../shared/directives/animate-on-visible/animate-on-visible-left.directive';
-import { AnimateOnVisibleRight } from '../../shared/directives/animate-on-visible/animate-on-visible-right.directive';
-import { animations } from '../../shared/models/animations-model';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { DecimalMeterGroupComponent } from '../../shared/components/decimal-meter-group.component/decimal-meter-group.component';
 import { TechColorService } from '../../core/services/tech-color.service';
+import { AnimateOnVisibleSideDirective } from '../../shared/directives/animate-on-visible/animate-on-visible-side.directive';
 
 @Component({
   selector: 'app-projects',
-  imports: [SplitterModule, FieldsetModule, MeterGroupModule, AnimateOnVisibleRight, AnimateOnVisibleLeft, ButtonModule, TranslateModule, DecimalMeterGroupComponent],
+  imports: [SplitterModule, FieldsetModule, MeterGroupModule, ButtonModule, TranslateModule, DecimalMeterGroupComponent, AnimateOnVisibleSideDirective],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
-  animations: animations,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Projects implements OnDestroy {
