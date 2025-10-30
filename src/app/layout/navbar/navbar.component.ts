@@ -41,7 +41,6 @@ export class Navbar implements OnInit, AfterViewInit, OnDestroy {
   } as const;
 
   constructor() {
-    this.translate.setDefaultLang(this.currentLang());
     this.translate.use(this.currentLang());
 
     effect(() => {
@@ -69,10 +68,10 @@ export class Navbar implements OnInit, AfterViewInit, OnDestroy {
     );
 
     queueMicrotask(() => {
-      this.sections().forEach((it) => {
-        const el = document.getElementById(it.id);
+      for (const sections of this.sections()){
+        const el = document.getElementById(sections.id);
         if (el) this.observer!.observe(el);
-      });
+      }
     });
   }
 

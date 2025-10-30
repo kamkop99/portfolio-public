@@ -36,6 +36,6 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideRouter(routes, withRouterConfig(routerOptions)),
-    provideNoopAnimations()
+    provideNoopAnimations()// NOSONAR
   ]
 };

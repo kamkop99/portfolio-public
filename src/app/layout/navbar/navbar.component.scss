@@ -140,6 +140,9 @@
 }
 
 @media (max-width: 1000px) {
+  .inline-actions {
+    display: inline-flex;;
+  }
   .burger {
     display: inline-flex;
     background: none;
