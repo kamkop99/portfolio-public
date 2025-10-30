@@ -1,7 +1,7 @@
 <div class="projects">
   <ul>
     @for (d of data; track $index) {
-      <li>
+      <li class="project">
         <p-splitter class="mb-8" [layout]="outerLayout">
           <ng-template pTemplate="panel">
             <div class="flex items-center justify-center h-full">
@@ -22,7 +22,8 @@
                     </p-fieldset>
                   </div>
                 </ng-template>
-
+                
+                @if (d.techStack && d.techStack.length > 0 && d.techInfo) {
                 <ng-template pTemplate="panel">
                   <div class="flex items-center justify-center techInfo">
                     <div class="techStacks" appAnimateOnVisibleSideDirective [direction]="'left'">
@@ -40,6 +41,7 @@
                     </div>
                   </div>
                 </ng-template>
+              }
               </p-splitter>
             </div>
           </ng-template>
