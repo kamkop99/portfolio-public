@@ -40,10 +40,6 @@ export class Projects {
     () => (this.isNarrow().matches ? 'vertical' : 'horizontal')
   );
 
-  readonly panelSizes = computed(() =>
-    this.outerLayout() === 'horizontal' ? [50, 50] : [100, 100]
-  );
-
   readonly renderSplitter = signal(true);
 
 
