@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, Input, OnDestroy, signal } from '@angular/core';
 import { ProjectItem } from '../../shared/models/projects-model';
 import { SplitterModule } from 'primeng/splitter';
 import { FieldsetModule } from 'primeng/fieldset';
 import { MeterGroupModule } from 'primeng/metergroup';
 import { ButtonModule } from 'primeng/button';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Subscription } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { DecimalMeterGroupComponent } from '../../shared/components/decimal-meter-group.component/decimal-meter-group.component';
 import { TechColorService } from '../../core/services/tech-color.service';
 import { AnimateOnVisibleSideDirective } from '../../shared/directives/animate-on-visible/animate-on-visible-side.directive';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-projects',
@@ -18,17 +18,44 @@ import { AnimateOnVisibleSideDirective } from '../../shared/directives/animate-o
   styleUrl: './projects.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Projects implements OnDestroy {
-  @Input() data: ProjectItem [] = [];
-  outerLayout: 'horizontal' | 'vertical' = 'horizontal';
-  private sub: Subscription;
+export class Projects {
+  readonly data = input<ProjectItem[]>([]);
+
+  private readonly bp = inject(BreakpointObserver);
+  private readonly techColorService = inject(TechColorService);
+
+  private static readonly QUERY = '(max-width: 1550px)';
+
+  private readonly isNarrow = toSignal(
+    this.bp.observe([Projects.QUERY]),
+    {
+      initialValue: {
+        matches: false,
+        breakpoints: { [Projects.QUERY]: false },
+      },
+    }
+  );
+
+  readonly outerLayout = computed<'horizontal' | 'vertical'>(
+    () => (this.isNarrow().matches ? 'vertical' : 'horizontal')
+  );
+
+  readonly panelSizes = computed(() =>
+    this.outerLayout() === 'horizontal' ? [50, 50] : [100, 100]
+  );
+
+  readonly renderSplitter = signal(true);
 
 
-  constructor(private bp: BreakpointObserver, private techColorService: TechColorService) {
-  this.sub = this.bp
-    .observe('(max-width: 1550px)')
-    .subscribe(r => {
-      this.outerLayout = r.matches ? 'vertical' : 'horizontal';
+  constructor() {
+    let last: 'horizontal' | 'vertical' | null = null;
+    effect(() => {
+      const cur = this.outerLayout();
+      if (cur !== last) {
+        last = cur;
+        this.renderSplitter.set(false);
+        queueMicrotask(() => this.renderSplitter.set(true));
+      }
     });
   }
 
@@ -57,9 +84,5 @@ export class Projects implements OnDestroy {
       rounded[idxMax].value = Math.round((rounded[idxMax].value + diff) * 10) / 10;
     }
     return rounded;
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 }

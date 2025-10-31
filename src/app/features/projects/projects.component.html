@@ -1,8 +1,8 @@
 <div class="projects">
   <ul>
-    @for (d of data; track $index) {
+    @for (d of data(); track $index) {
       <li class="project">
-        <p-splitter class="mb-8" [layout]="outerLayout">
+        <p-splitter class="mb-8" [layout]="outerLayout()">
           <ng-template pTemplate="panel">
             <div class="flex items-center justify-center h-full">
               <p-splitter [panelSizes]="[60, 40]" class="mb-8" layout="vertical">
